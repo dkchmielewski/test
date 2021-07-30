@@ -1,0 +1,62 @@
+<?x ml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+	<resource-ref>
+		<res-ref-name>jdbc/example_db</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+		<res-sharing-scope>Shareable</res-sharing-scope>
+	</resource-ref>
+
+	<servlet>
+ 		<servlet-name>watermelon</servlet-name>
+		<servlet-class>myservlets.watermelon</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>garden</servlet-name>
+		<servlet-class>myservlets.garden</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>list</servlet-name>
+		<servlet-class>myservlets.list</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>kiwi</servlet-name>
+		<servlet-class>myservlets.kiwi</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>watermelon</servlet-name>
+		<url-pattern>/fruit/summer/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>garden</servlet-name>
+		<url-pattern>/seeds/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>list</servlet-name>
+		<url-pattern>/seedlist</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>kiwi</servlet-name>
+		<url-pattern>*.abc</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+ <servlet-name>hello</servlet-name>
+ <servlet-class>HelloWorld</servlet-class>
+ </servlet>
+ <servlet-mapping>
+ <servlet-name>hello</servlet-name>
+ <url-pattern>/mywebapp/HelloWorld</url-pattern>
+ </servlet-mapping>
+
+</web-app>

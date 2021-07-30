@@ -1,0 +1,33 @@
+version: "3"
+services:
+  web:
+    image: jwilder/nginx-proxy:latest
+    volumes:
+      - "/var/run/docker.sock:/tmp/docker.sock:ro"
+    ports:
+      - "84:80"
+    links:
+      - tomcat
+  db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: nimda
+      MYSQL_DATABASE: example_db
+      MYSQL_USER: example_db_user
+      MYSQL_PASSWORD: example_db_pass
+    volumes:
+      - ".:/docker-entrypoint-initdb.d"
+  tomcat:
+    build: ~/myapp_dmulligan/
+    environment:
+      VIRTUAL_HOST: localhost
+      VIRTUAL_PORT: 8080
+      JDBC_URL: jdbc:mysql://db:3306/example_db?connectTimeout=0&amp;socketTimeout=0&amp;autoReconnect=true
+      JDBC_USER: example_db_user
+      JDBC_PASS: example_db_pass
+    volumes:
+      - "./tomcat/webapps:/usr/local/tomcat/webapps"
+    links:
+      - db
+
+
